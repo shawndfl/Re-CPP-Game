@@ -1,3 +1,5 @@
+#include <SFML/Graphics.hpp>
+
 //Main Game Class
 class Game
 {
@@ -14,7 +16,7 @@ public:
   //####
 
   //####
-  void draw();
+  void draw(sf::Window &window);
   //####
 };
 

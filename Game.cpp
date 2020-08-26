@@ -1,5 +1,8 @@
 #include "Game.h"
-//!Declaration of Game class goes here!
+Game::Game()
+{
+  
+}
 
 //Collision Funcs.
 //All Collisions

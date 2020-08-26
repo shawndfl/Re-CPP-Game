@@ -1,7 +1,10 @@
 #include <SFML/Graphics.hpp>
+#include "Game.h"
 
 int main ()
 {
+
+  Game game;
 
   sf::Window window;
   window.create(sf::VideoMode(800, 600), "My window");
@@ -18,14 +21,17 @@ int main ()
     //##############
     // Handle Input
     //##############
+    game.handleInput();
 
     //##############
     // Update
     //##############
+    game.update();
 
     //##############
     // Draw
     //##############
+    game.draw(window);
 
   }
 

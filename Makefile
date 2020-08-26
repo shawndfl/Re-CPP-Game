@@ -1,6 +1,6 @@
 
 #OBJS specifies which files to compile as part of the project
-OBJS = main.cpp Game.cpp
+OBJS = main.cpp Game.cpp handleInput.cpp update.cpp draw.cpp
 
 #CC specifies which compiler we're using
 CC = g++
