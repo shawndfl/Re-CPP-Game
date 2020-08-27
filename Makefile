@@ -1,16 +1,16 @@
 
 #OBJS specifies which files to compile as part of the project
-OBJS = main.cpp Game.cpp handleInput.cpp update.cpp draw.cpp
+OBJS = main.cpp TextureHolder.cpp Player.cpp Collision.cpp Game.cpp
 
 #CC specifies which compiler we're using
 CC = g++
 
 #COMPILER_FLAGS specifies the additional compilation options we're using
 # -w suppresses all warnings
-COMPILER_FLAGS = -w
+COMPILER_FLAGS = -g -Wall
 
 #LINKER_FLAGS specifies the libraries we're linking against
-LINKER_FLAGS = -lsfml-window -lsfml-system -lsfml-graphics
+LINKER_FLAGS = -lsfml-system -lsfml-window -lsfml-graphics
 
 #OBJ_NAME specifies the name of our exectuable
 OBJ_NAME = Game
