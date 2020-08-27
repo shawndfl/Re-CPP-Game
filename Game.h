@@ -16,7 +16,7 @@ public:
   //####
 
   //####
-  void draw(sf::Window &window);
+  void draw(sf::RenderWindow &window);
   //####
 };
 

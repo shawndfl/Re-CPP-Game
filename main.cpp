@@ -6,8 +6,8 @@ int main ()
 
   Game game;
 
-  sf::Window window;
-  window.create(sf::VideoMode(800, 600), "My window");
+  sf::RenderWindow window;
+  window.create(sf::VideoMode(200, 200), "My window");
 
   //Main Game Loop
   while(window.isOpen())
