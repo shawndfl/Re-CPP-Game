@@ -14,15 +14,15 @@ class Player
 
     //X Coord Variables
     float m_Xvelocity;
-    int m_MaxXvelocity = 1500;
-    int m_Xacceleration = 500;
+    int m_MaxXvelocity = 600;
+    int m_Xacceleration = 200;
 
     //Y Coord Variables
     float m_Yvelocity;
-    int m_MaxYvelocity;
+    int m_MaxYvelocity = 700;
     int m_Yspeed;
     int m_GravityAcceleration = 62;
-    int m_JumpSpeed = 938;
+    int m_JumpSpeed = 600;
     bool m_canJump;
 
     //Status Variables
@@ -57,4 +57,5 @@ class Player
 
     //Other Funcs.
     void update(float elapsedTime);
+    void draw(float elapsedTime);
 };

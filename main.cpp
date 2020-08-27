@@ -16,8 +16,10 @@ int main()
 
   Player player;
 
+  int windowWidth = 288;
+  int windowHeight = 162;
   sf::RenderWindow window;
-  window.create(sf::VideoMode(640, 360), "Game");
+  window.create(sf::VideoMode(windowWidth, windowHeight), "Game");
   window.setVerticalSyncEnabled(true);
 
   //Main Game Loop
@@ -46,9 +48,7 @@ int main()
     if (GameState == GameStates::PLAYING)
     {
       if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
-      {
-        player.Jump();
-      }
+      {player.Jump();}else{player.Fall();}
       if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
       {player.moveLeft();}else{player.stopLeft();}
       if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
