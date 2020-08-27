@@ -1,8 +1,9 @@
 #include <SFML/Graphics.hpp>
 #include "TextureHolder.h"
-#include "Game.h"
 #include "Player.h"
 
+
+enum class GameStates { PLAYING, PAUSED, GAMEOVER };
 int main()
 {
   GameStates GameState;

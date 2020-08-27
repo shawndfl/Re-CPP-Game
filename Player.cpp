@@ -1,10 +1,13 @@
-#include "Player.h"
 #include "TextureHolder.h"
-#include <SFML/Graphics.hpp>
+#include "SpriteAnimator.h"
+#include "Player.h"
 
 Player::Player()
 {
   m_Sprite.setTexture(TextureHolder::GetTexture("assets/Player/Sheet Test.png"));
+  m_SpriteSize.width = 24;
+  m_SpriteSize.height = 24;
+  m_ActingFr = 0;
 
   m_Xvelocity = 0;
   m_Yvelocity = 0;
@@ -57,7 +60,7 @@ void Player::OnGround()
 }
 
 //Get Sprite
-Sprite Player::getSprite()
+sf::Sprite Player::getSprite()
 {
   return m_Sprite;
 }
@@ -110,4 +113,5 @@ void Player::update(float elapsedTime)
   m_Position.y += m_Yvelocity;
 
   m_Sprite.setPosition(sf::Vector2f(m_Position.x, m_Position.y));
+  SpriteAnimator(m_Sprite, m_SpriteSize.width, m_SpriteSize.height, m_FramesPerRow, m_FramesPerColumn, m_ActingFr);
 }

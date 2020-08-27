@@ -1,5 +1,4 @@
 #include <SFML/Graphics.hpp>
-#include "TextureHolder.h"
 #include "Collisions.h"
 
 class Player
@@ -8,12 +7,15 @@ class Player
     RectBound m_Position;
     RectBound m_SpriteSize;
 
-    Sprite m_Sprite;
+    sf::Sprite m_Sprite;
+    int m_FramesPerRow = 1;
+    int m_FramesPerColumn = 10;
+    int m_ActingFr;
 
     //X Coord Variables
     float m_Xvelocity;
-    int m_MaxXvelocity = 6250;
-    int m_Xacceleration = 625;
+    int m_MaxXvelocity = 1500;
+    int m_Xacceleration = 500;
 
     //Y Coord Variables
     float m_Yvelocity;
@@ -51,7 +53,7 @@ class Player
     void OnGround();
 
     //Get sprite
-    Sprite getSprite();
+    sf::Sprite getSprite();
 
     //Other Funcs.
     void update(float elapsedTime);

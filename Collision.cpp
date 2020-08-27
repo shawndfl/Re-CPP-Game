@@ -1,5 +1,10 @@
 #include "Collisions.h"
 
+RectBound::RectBound()
+{
+  
+}
+
 //Collision Funcs.
 //All Collisions
 bool Collision(RectBound Obj1, RectBound Obj2)
