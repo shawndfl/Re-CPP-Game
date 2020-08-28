@@ -24,7 +24,7 @@ class Tile
     void setType(int ID);
     tileTypes getType();
 
-    void update(RectBound tilePosition, RectBound camera);
+    void update(RectBound camera);
     void draw();
 
     sf::Sprite getSprite();

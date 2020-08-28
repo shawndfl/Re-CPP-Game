@@ -4,8 +4,6 @@
 class RectBound //For boundaries (collisions)
 {
   public:
-    RectBound();
-
     int x; //X coord
     int y; //y coord
     int width; //width for finding the right side of x coord

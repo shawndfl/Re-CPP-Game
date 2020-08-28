@@ -1,5 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include "TextureHolder.h"
+#include "Collisions.h"
 #include "Player.h"
 #include "Tile.h"
 
@@ -45,6 +46,7 @@ int main()
      for (int j = 0; j < levelWidthTiles; j++)
      {
        tiles[i][j].setType(levelMap[i][j]);
+       tiles[i][j].setPos(j, i);
      }
    }
 
@@ -110,12 +112,54 @@ int main()
     //Update the total game time
     gameTimeTotal += dt;
 
+    RectBound camera;
+    camera.width = windowWidth;
+    camera.height = windowHeight;
+
     //Make a decimal fraction of 1 from the delta time
     float dtAsSeconds = dt.asSeconds();
 
     if (GameState == GameStates::PLAYING)
     {
-      player.update(dtAsSeconds);
+      for (int i = 0; i < levelHeightTiles; i++)
+      {
+        for (int j = 0; j < levelWidthTiles; j++)
+        {
+          tiles[i][j].update(camera);
+        }
+      }
+
+      player.update(dtAsSeconds, camera);
+
+      //Update Camera - Must be last!
+
+      //X coord
+      if (player.getPos().x <= 100)
+      {
+        camera.x = 0;
+      }
+      else if (player.getPos().x > ((levelWidthTiles * 16) - 188))
+      {
+        camera.x = ((levelWidthTiles * 16) - camera.width);
+      }
+      else
+      {
+        camera.x = player.getPos().x - 100;
+      }
+
+      //Y coord
+      if (player.getPos().y <= 100)
+      {
+        camera.y = 0;
+      }
+      else if (player.getPos().y > ((levelHeightTiles * 16) -62))
+      {
+        camera.y = ((levelHeightTiles * 16) - camera.height);
+      }
+      else
+      {
+        camera.y = player.getPos().y - 100;
+      }
     }
 
     //##############
@@ -134,6 +178,13 @@ int main()
     //Draw Everything Here
     if (GameState == GameStates::PLAYING)
     {
+      for (int i = 0; i < levelHeightTiles; i++)
+      {
+        for (int j = 0; j < levelWidthTiles; j++)
+        {
+          window.draw(tiles[i][j].getSprite());
+        }
+      }
       window.draw(player.getSprite());
     }
 

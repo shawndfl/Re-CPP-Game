@@ -59,6 +59,6 @@ class Player
     sf::Sprite getSprite();
 
     //Other Funcs.
-    void update(float elapsedTime);
+    void update(float elapsedTime, RectBound camera);
     void draw();
 };

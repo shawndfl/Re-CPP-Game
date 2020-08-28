@@ -66,7 +66,7 @@ tileTypes Tile::getType()
   return m_TileType;
 }
 
-void Tile::update(RectBound tilePosition, RectBound camera)
+void Tile::update(RectBound camera)
 {
   m_Sprite.setPosition(m_Position.x - camera.x, m_Position.y - camera.y);
 }

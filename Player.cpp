@@ -73,7 +73,7 @@ sf::Sprite Player::getSprite()
 }
 
 //Other Funcs.
-void Player::update(float elapsedTime)
+void Player::update(float elapsedTime, RectBound camera)
 {
   //#######
   //X Coord
@@ -134,7 +134,7 @@ void Player::update(float elapsedTime)
   //Apply Y velocity
   m_Position.y += m_Yvelocity * elapsedTime;
 
-  m_Sprite.setPosition(m_Position.x/* - camera.x*/, m_Position.y/* - camera.y*/);
+  m_Sprite.setPosition(m_Position.x - camera.x, m_Position.y - camera.y);
 }
 
 void Player::draw()
