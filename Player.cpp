@@ -12,6 +12,7 @@ Player::Player()
   m_Position.width = m_SpriteSize.width;
   m_Position.height = m_SpriteSize.height;
 
+  m_MaxFr = m_FramesPerRow * m_FramesPerColumn;
   m_ActingFr = 0;
 
   m_Xvelocity = 0;
@@ -133,13 +134,22 @@ void Player::update(float elapsedTime)
   //Apply Y velocity
   m_Position.y += m_Yvelocity * elapsedTime;
 
-  m_Sprite.setPosition(sf::Vector2f(m_Position.x, m_Position.y));
-  SpriteAnimator(m_Sprite, m_SpriteSize.width, m_SpriteSize.height, m_FramesPerRow, m_FramesPerColumn, m_ActingFr);
+  m_Sprite.setPosition(m_Position.x/* - camera.x*/, m_Position.y/* - camera.y*/);
 }
 
-void Player::draw(float elapsedTime)
+void Player::draw()
 {
   //######################
   //handle animation here!
   //######################
+  //Sprite position in relation to camera
+  //Animation
+
+  //Temp Frame changer
+  m_ActingFr++;
+  if (m_ActingFr >= m_MaxFr)
+  {
+    m_ActingFr -= m_MaxFr;
+  }
+  SpriteAnimator(m_Sprite, m_SpriteSize.width, m_SpriteSize.height, m_FramesPerRow, m_FramesPerColumn, m_ActingFr);
 }

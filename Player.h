@@ -8,8 +8,9 @@ class Player
     RectBound m_SpriteSize;
 
     sf::Sprite m_Sprite;
-    int m_FramesPerRow = 1;
-    int m_FramesPerColumn = 10;
+    int m_FramesPerRow = 10;
+    int m_FramesPerColumn = 1;
+    int m_MaxFr;
     int m_ActingFr;
 
     //X Coord Variables
@@ -57,5 +58,5 @@ class Player
 
     //Other Funcs.
     void update(float elapsedTime);
-    void draw(float elapsedTime);
+    void draw();
 };

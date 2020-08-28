@@ -1,6 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include "TextureHolder.h"
 #include "Player.h"
+#include <iostream>
 
 
 enum class GameStates { PLAYING, PAUSED, GAMEOVER };
@@ -10,6 +11,7 @@ int main()
   GameState = GameStates::GAMEOVER;
 
   sf::Clock clock;
+  sf::Clock animClock;
   sf::Time gameTimeTotal;
 
   TextureHolder holder;
@@ -89,6 +91,14 @@ int main()
     // Draw
     //##############
     window.clear();
+    //Animation Timer! Every 0.048 seconds update animations!
+    if (animClock.getElapsedTime().asSeconds() > 0.048f)
+    {
+      //Put all animation funcs. in here!
+
+      player.draw();
+      animClock.restart();
+    }
 
     //Draw Everything Here
     if (GameState == GameStates::PLAYING)
