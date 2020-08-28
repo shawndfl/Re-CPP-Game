@@ -1,3 +1,5 @@
+#pragma once
+
 //Classes and functions
 class RectBound //For boundaries (collisions)
 {

@@ -1,7 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include "TextureHolder.h"
 #include "Player.h"
-#include <iostream>
+#include "Tile.h"
 
 
 enum class GameStates { PLAYING, PAUSED, GAMEOVER };
@@ -17,6 +17,37 @@ int main()
   TextureHolder holder;
 
   Player player;
+
+  //Tile Space
+  int levelWidthTiles = 20;
+  int levelHeightTiles = 11;
+  Tile** tiles = nullptr;
+  delete[] tiles;
+
+  int levelMap[levelHeightTiles][levelWidthTiles] = {{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+                                                     {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+                                                     {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+                                                     {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+                                                     {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+                                                     {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+                                                     {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+                                                     {2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,3,4},
+                                                     {2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4},
+                                                     {2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4},
+                                                     {2,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,4}};
+   tiles = new Tile*[levelHeightTiles];
+   for(int i = 0; i < levelHeightTiles; i++)
+   {
+     tiles[i] = new Tile[levelWidthTiles];
+   }
+   for (int i = 0; i < levelHeightTiles; i++)
+   {
+     for (int j = 0; j < levelWidthTiles; j++)
+     {
+       tiles[i][j].setType(levelMap[i][j]);
+     }
+   }
+
 
   int windowWidth = 288;
   int windowHeight = 162;
@@ -109,6 +140,8 @@ int main()
     window.display();
 
   }
+
+  delete[] tiles;
 
   return 0;
 }

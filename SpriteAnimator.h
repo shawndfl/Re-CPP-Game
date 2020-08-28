@@ -1,3 +1,5 @@
+#pragma once
 #include <SFML/Graphics.hpp>
+#include "Collisions.h"
 
-void SpriteAnimator(sf::Sprite& sprite, int spriteWidth, int spriteHeight, int framesPerRow, int framesPerColumn, int currentFrame);
+void SpriteAnimator(sf::Sprite& sprite, RectBound SpriteSize, int framesPerRow, int framesPerColumn, int currentFrame);

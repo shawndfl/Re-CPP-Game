@@ -151,5 +151,5 @@ void Player::draw()
   {
     m_ActingFr -= m_MaxFr;
   }
-  SpriteAnimator(m_Sprite, m_SpriteSize.width, m_SpriteSize.height, m_FramesPerRow, m_FramesPerColumn, m_ActingFr);
+  SpriteAnimator(m_Sprite, m_SpriteSize, m_FramesPerRow, m_FramesPerColumn, m_ActingFr);
 }
