@@ -13,8 +13,8 @@ class Tile
     RectBound m_Position;
     tileTypes m_TileType;
 
-    int m_FrTilesPerRow = 5;
-    int m_FrTilesPerColumn = 1;
+    int m_FrTilesPerRow = 4;
+    int m_FrTilesPerColumn = 4;
 
   public:
     Tile();

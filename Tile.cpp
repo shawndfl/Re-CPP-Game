@@ -22,12 +22,12 @@ RectBound Tile::getPos()
   return m_Position;
 }
 
-void Tile::setType(int ID)
+void Tile::setType(int ID) //Set type and frame
 {
   if (ID == 0)
   {
     m_TileType = tileTypes::air;
-    SpriteAnimator(m_Sprite, m_Position, m_FrTilesPerRow, m_FrTilesPerColumn, 0);
+    m_Sprite.setTexture(TextureHolder::GetTexture("assets/air.png"));
   }
   else if (ID == 1)
     {
@@ -47,17 +47,17 @@ void Tile::setType(int ID)
   else if (ID == 4)
     {
       m_TileType = tileTypes::ground;
-      SpriteAnimator(m_Sprite, m_Position, m_FrTilesPerRow, m_FrTilesPerColumn, 2);
+      SpriteAnimator(m_Sprite, m_Position, m_FrTilesPerRow, m_FrTilesPerColumn, 4);
     }
   else if (ID == 5)
     {
       m_TileType = tileTypes::ground;
-      SpriteAnimator(m_Sprite, m_Position, m_FrTilesPerRow, m_FrTilesPerColumn, 2);
+      SpriteAnimator(m_Sprite, m_Position, m_FrTilesPerRow, m_FrTilesPerColumn, 5);
     }
   else if (ID == 6)
     {
       m_TileType = tileTypes::ground;
-      SpriteAnimator(m_Sprite, m_Position, m_FrTilesPerRow, m_FrTilesPerColumn, 2);
+      SpriteAnimator(m_Sprite, m_Position, m_FrTilesPerRow, m_FrTilesPerColumn, 6);
     }
 }
 
