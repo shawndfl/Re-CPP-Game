@@ -56,10 +56,13 @@ void Player::Jump()
 {
   m_jumping = true;
 }
+void Player::dontJump()
+{
+  m_jumping = false;
+}
 void Player::Fall()
 {
   m_OnGround = false;
-  m_jumping = false;
 }
 void Player::OnGround()
 {
@@ -73,7 +76,7 @@ sf::Sprite Player::getSprite()
 }
 
 //Other Funcs.
-void Player::update(float elapsedTime, RectBound camera)
+void Player::update(int groundY, float elapsedTime, RectBound camera)
 {
   //#######
   //X Coord
@@ -116,18 +119,18 @@ void Player::update(float elapsedTime, RectBound camera)
   m_Yspeed += m_GravityAcceleration;
   if (m_Yvelocity > m_MaxYvelocity)
   {m_Yvelocity = m_MaxYvelocity;}
-  if (m_Position.y >= 144 - m_Position.height/*m_OnGround*/)
+  if (m_Position.y >= groundY - m_Position.height && m_OnGround)
   {
     m_Yvelocity = 0; //Stop Falling
-    m_Position.y = 144 - m_Position.height; //Set y to ground coord
+    m_Position.y = groundY - m_Position.height; //Set y to ground coord
     m_canJump = true; //Can jump
   }
   //Jump
-  if (m_jumping && m_canJump)
+  if (m_jumping && m_canJump && m_OnGround)
   {
+    m_Yvelocity = -(m_JumpSpeed);
     m_jumping = true;
     m_canJump = false;
-    m_Yvelocity = -(m_JumpSpeed);
     m_OnGround = false;
   }
 

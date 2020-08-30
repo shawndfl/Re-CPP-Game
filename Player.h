@@ -52,6 +52,7 @@ class Player
 
     //Y Coord Funcs.
     void Jump();
+    void dontJump();
     void Fall();
     void OnGround();
 
@@ -59,6 +60,6 @@ class Player
     sf::Sprite getSprite();
 
     //Other Funcs.
-    void update(float elapsedTime, RectBound camera);
+    void update(int groundY, float elapsedTime, RectBound camera);
     void draw();
 };

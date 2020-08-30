@@ -83,7 +83,7 @@ int main()
     if (GameState == GameStates::PLAYING)
     {
       if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
-      {player.Jump();}else{player.Fall();}
+      {player.Jump();}else{player.dontJump();}
       if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
       {player.moveLeft();}else{player.stopLeft();}
       if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
@@ -119,6 +119,8 @@ int main()
     //Make a decimal fraction of 1 from the delta time
     float dtAsSeconds = dt.asSeconds();
 
+    player.Fall();
+    int groundY;
     if (GameState == GameStates::PLAYING)
     {
       for (int i = 0; i < levelHeightTiles; i++)
@@ -127,12 +129,23 @@ int main()
         {
           if (Collision(tiles[i][j].getPos(), camera))
           {
-            tiles[i][j].update(camera);
+            if (tiles[i][j].getType() != tileTypes::air)
+            {
+              tiles[i][j].update(camera);
+
+              if (CollisionsGround(player.getPos(), tiles[i][j].getPos())
+              && CollisionX(player.getPos(), tiles[i][j].getPos())
+              && tiles[i][j].getType() == tileTypes::ground)
+              {
+                groundY = tiles[i][j].getPos().y;
+                player.OnGround();
+              }
+            }
           }
         }
       }
 
-      player.update(dtAsSeconds, camera);
+      player.update(groundY, dtAsSeconds, camera);
 
       //Update Camera - Must be last!
 
@@ -185,7 +198,7 @@ int main()
       {
         for (int j = 0; j < levelWidthTiles; j++)
         {
-          if (Collision(tiles[i][j].getPos(), camera))
+          if (Collision(tiles[i][j].getPos(), camera) && tiles[i][j].getType() != tileTypes::air)
           {
             window.draw(tiles[i][j].getSprite());
           }
