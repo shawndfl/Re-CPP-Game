@@ -125,7 +125,10 @@ int main()
       {
         for (int j = 0; j < levelWidthTiles; j++)
         {
-          tiles[i][j].update(camera);
+          if (Collision(tiles[i][j].getPos(), camera))
+          {
+            tiles[i][j].update(camera);
+          }
         }
       }
 
@@ -182,7 +185,10 @@ int main()
       {
         for (int j = 0; j < levelWidthTiles; j++)
         {
-          window.draw(tiles[i][j].getSprite());
+          if (Collision(tiles[i][j].getPos(), camera))
+          {
+            window.draw(tiles[i][j].getSprite());
+          }
         }
       }
       window.draw(player.getSprite());
