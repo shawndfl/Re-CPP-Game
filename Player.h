@@ -17,8 +17,9 @@ class Player
 
     //X Coord Variables
     float m_Xvelocity;
-    int m_MaxXvelocity = 600;
-    int m_Xacceleration = 200;
+    int m_MaxXvelocity = 300;
+    int m_FMaxXvelocity = 450;//Will be used for speed button
+    int m_Xacceleration = 100;
 
     //Y Coord Variables
     float m_Yvelocity;

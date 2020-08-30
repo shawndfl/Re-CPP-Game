@@ -57,6 +57,11 @@ int main()
   window.create(sf::VideoMode(windowWidth, windowHeight), "Game");
   window.setVerticalSyncEnabled(true);
 
+  sf::RectangleShape background;
+  background.setSize(sf::Vector2f(windowWidth, windowHeight));
+  background.setFillColor(sf::Color::Cyan);
+  background.setPosition(0, 0);
+
   //Main Game Loop
   while(window.isOpen())
   {
@@ -194,6 +199,7 @@ int main()
     //Draw Everything Here
     if (GameState == GameStates::PLAYING)
     {
+      window.draw(background);
       for (int i = 0; i < levelHeightTiles; i++)
       {
         for (int j = 0; j < levelWidthTiles; j++)
