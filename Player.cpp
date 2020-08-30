@@ -119,7 +119,7 @@ void Player::update(int groundY, float elapsedTime, RectBound camera)
   m_Yspeed += m_GravityAcceleration;
   if (m_Yvelocity > m_MaxYvelocity)
   {m_Yvelocity = m_MaxYvelocity;}
-  if (m_Position.y >= groundY - m_Position.height && m_OnGround)
+  if (m_OnGround)
   {
     m_Yvelocity = 0; //Stop Falling
     m_Position.y = groundY - m_Position.height; //Set y to ground coord
