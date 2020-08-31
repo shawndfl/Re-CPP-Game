@@ -92,20 +92,34 @@ void Player::update(int groundY, float elapsedTime, RectBound camera)
     m_Xvelocity += m_Xacceleration;
   }
 
-  //X velocity caps
+  //Maximum X velocity
   if (m_Xvelocity > m_MaxXvelocity)
   {m_Xvelocity = m_MaxXvelocity;}
   else if (m_Xvelocity < -m_MaxXvelocity)
   {m_Xvelocity = -m_MaxXvelocity;}
 
+  //Friction
   if (!m_movingLeft && !m_movingRight && m_Xvelocity != 0)
   {
-    if (m_Xvelocity > 0 && m_Xvelocity >= m_Xacceleration)
+    if (m_Xvelocity > 0 && m_Xvelocity >= m_Xacceleration) //Right
       m_Xvelocity -= m_Xacceleration;
-    else if (m_Xvelocity < 0 && m_Xvelocity <= -m_Xacceleration)
+    else if (m_Xvelocity < 0 && m_Xvelocity <= -m_Xacceleration) //Left
       m_Xvelocity += m_Xacceleration;
-    else
+    else //Stop Completely
       m_Xvelocity = 0;
+  }
+
+  //Left Screen Edge Boundaries
+  if (m_movingLeft && m_Position.x <= camera.x)
+  {
+    m_Xvelocity = 0;
+    m_Position.x = camera.x;
+  }
+  //Right screen edge boundaries
+  if (m_movingRight && (m_Position.x + m_Position.width) >= (camera.x + camera.width))
+  {
+    m_Xvelocity = 0;
+    m_Position.x = ((camera.x + camera.width) - m_Position.width);
   }
 
   //Apply X velocity to X coord
