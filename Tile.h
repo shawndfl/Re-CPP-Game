@@ -1,4 +1,6 @@
-#pragma once
+#ifndef TILE_H
+#define TILE_H
+
 #include <SFML/Graphics.hpp>
 #include "Collisions.h"
 #include "TextureHolder.h"
@@ -29,3 +31,5 @@ class Tile
 
     sf::Sprite getSprite();
 };
+
+#endif

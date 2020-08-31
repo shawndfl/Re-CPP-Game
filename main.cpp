@@ -59,7 +59,7 @@ int main()
 
   sf::RectangleShape background;
   background.setSize(sf::Vector2f(windowWidth, windowHeight));
-  background.setFillColor(sf::Color::Cyan);
+  background.setFillColor(sf::Color(135, 206, 235));
   background.setPosition(0, 0);
 
   //Main Game Loop

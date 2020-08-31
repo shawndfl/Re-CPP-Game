@@ -1,3 +1,7 @@
+//################################################
+// Taken from beggining c++ game making with sfml
+//################################################
+
 #ifndef TEXTURE_HOLDER_H
 #define TEXTURE_HOLDER_H
 

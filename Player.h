@@ -1,4 +1,5 @@
-#pragma once
+#ifndef PLAYER_H
+#define PLAYER_H
 
 #include <SFML/Graphics.hpp>
 #include "Collisions.h"
@@ -64,3 +65,5 @@ class Player
     void update(int groundY, float elapsedTime, RectBound camera);
     void draw();
 };
+
+#endif

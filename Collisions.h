@@ -1,4 +1,5 @@
-#pragma once
+#ifndef COLLISIONS_H
+#define COLLISIONS_H
 
 //Classes and functions
 class RectBound //For boundaries (collisions)
@@ -23,3 +24,5 @@ bool CollisionTop(RectBound Obj1, RectBound Obj2);
 bool CollisionX(RectBound Obj1, RectBound Obj2);
 bool CollisionLeft(RectBound Obj1, RectBound Obj2);
 bool CollisionRight(RectBound Obj1, RectBound Obj2);
+
+#endif

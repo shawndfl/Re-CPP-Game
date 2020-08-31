@@ -1,3 +1,7 @@
+//################################################
+// Taken from beggining c++ game making with sfml
+//################################################
+
 #include "TextureHolder.h"
 #include <assert.h>
 
