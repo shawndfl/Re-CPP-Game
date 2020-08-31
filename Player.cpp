@@ -76,8 +76,37 @@ sf::Sprite Player::getSprite()
 }
 
 //Other Funcs.
-void Player::update(int groundY, float elapsedTime, RectBound camera)
+void Player::update(RectBound tilePos, float elapsedTime, RectBound camera)
 {
+  //#######
+  //Y Coord
+
+  //Gravity
+  m_Yvelocity += m_GravityAcceleration;
+  m_Yspeed += m_GravityAcceleration;
+  if (m_Yvelocity > m_MaxYvelocity)
+  {m_Yvelocity = m_MaxYvelocity;}
+  if (CollisionX(tilePos, m_Position))
+  {
+    if (CollisionBottom(m_Position, tilePos))
+    {
+      m_Yvelocity = 0; //Stop Falling
+      m_Position.y = tilePos.y - m_Position.height; //Set y to ground coord
+      m_canJump = true; //Can jump
+    }
+  }
+  //Jump
+  if (m_jumping && m_canJump)
+  {
+    m_Yvelocity = -(m_JumpSpeed);
+    m_jumping = true;
+    m_canJump = false;
+    m_OnGround = false;
+  }
+
+  //Apply Y velocity
+  m_Position.y += m_Yvelocity * elapsedTime;
+
   //#######
   //X Coord
 
@@ -124,32 +153,6 @@ void Player::update(int groundY, float elapsedTime, RectBound camera)
 
   //Apply X velocity to X coord
   m_Position.x += m_Xvelocity * elapsedTime;
-
-  //#######
-  //Y Coord
-
-  //Gravity
-  m_Yvelocity += m_GravityAcceleration;
-  m_Yspeed += m_GravityAcceleration;
-  if (m_Yvelocity > m_MaxYvelocity)
-  {m_Yvelocity = m_MaxYvelocity;}
-  if (m_OnGround)
-  {
-    m_Yvelocity = 0; //Stop Falling
-    m_Position.y = groundY - m_Position.height; //Set y to ground coord
-    m_canJump = true; //Can jump
-  }
-  //Jump
-  if (m_jumping && m_canJump && m_OnGround)
-  {
-    m_Yvelocity = -(m_JumpSpeed);
-    m_jumping = true;
-    m_canJump = false;
-    m_OnGround = false;
-  }
-
-  //Apply Y velocity
-  m_Position.y += m_Yvelocity * elapsedTime;
 
   m_Sprite.setPosition(m_Position.x - camera.x, m_Position.y - camera.y);
 }

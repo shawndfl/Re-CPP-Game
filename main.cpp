@@ -5,7 +5,7 @@
 #include "Tile.h"
 
 
-enum class GameStates { PLAYING, PAUSED, GAMEOVER };
+enum class GameStates { GAMEOVER, PLAYING, PAUSED };
 int main()
 {
   GameStates GameState;
@@ -59,7 +59,7 @@ int main()
 
   sf::RectangleShape background;
   background.setSize(sf::Vector2f(windowWidth, windowHeight));
-  background.setFillColor(sf::Color(135, 206, 235));
+  background.setFillColor(sf::Color(120, 199, 245));
   background.setPosition(0, 0);
 
   //Main Game Loop
@@ -87,24 +87,21 @@ int main()
     }
     if (GameState == GameStates::PLAYING)
     {
+
+      if (sf::Keyboard::isKeyPressed(sf::Keyboard::P))
+        GameState = GameStates::PAUSED;
+
       if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
       {player.Jump();}else{player.dontJump();}
       if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
       {player.moveLeft();}else{player.stopLeft();}
       if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
       {player.moveRight();}else{player.stopRight();}
-
-      if (sf::Keyboard::isKeyPressed(sf::Keyboard::P))
-      {
-        GameState = GameStates::PAUSED;
-      }
     }
     if (GameState == GameStates::PAUSED)
     {
       if (sf::Keyboard::isKeyPressed(sf::Keyboard::P))
-      {
         GameState = GameStates::PLAYING;
-      }
     }
 
     //##############
@@ -123,9 +120,8 @@ int main()
 
     //Make a decimal fraction of 1 from the delta time
     float dtAsSeconds = dt.asSeconds();
+    RectBound tilePos;
 
-    player.Fall();
-    int groundY;
     if (GameState == GameStates::PLAYING)
     {
       for (int i = 0; i < levelHeightTiles; i++)
@@ -138,19 +134,19 @@ int main()
             {
               tiles[i][j].update(camera);
 
-              if (CollisionsGround(player.getPos(), tiles[i][j].getPos())
-              && CollisionX(player.getPos(), tiles[i][j].getPos())
-              && tiles[i][j].getType() == tileTypes::ground)
+              if (CollisionX(tiles[i][j].getPos(), player.getPos()))
               {
-                groundY = tiles[i][j].getPos().y;
-                player.OnGround();
+                if (CollisionY(player.getPos(), tiles[i][j].getPos()) && tiles[i][j].getType() == tileTypes::ground)
+                {
+                  tilePos = tiles[i][j].getPos();
+                }
               }
             }
           }
         }
       }
 
-      player.update(groundY, dtAsSeconds, camera);
+      player.update(tilePos, dtAsSeconds, camera);
 
       //Update Camera - Must be last!
 

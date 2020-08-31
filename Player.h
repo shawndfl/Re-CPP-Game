@@ -62,7 +62,7 @@ class Player
     sf::Sprite getSprite();
 
     //Other Funcs.
-    void update(int groundY, float elapsedTime, RectBound camera);
+    void update(RectBound tilePos, float elapsedTime, RectBound camera);
     void draw();
 };
 

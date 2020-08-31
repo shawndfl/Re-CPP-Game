@@ -11,14 +11,6 @@ bool Collision(RectBound Obj1, RectBound Obj2)
 }
 
 //Y coord
-bool CollisionsGround(RectBound Obj1, RectBound Obj2)
-{
-  if (Obj1.y >= Obj2.y - Obj1.height)
-    return true;
-  else
-    return false;
-}
-
 bool CollisionY(RectBound Obj1, RectBound Obj2)
 {
   if (CollisionBottom(Obj1, Obj2) || CollisionTop(Obj1, Obj2))
@@ -53,14 +45,14 @@ bool CollisionX(RectBound Obj1, RectBound Obj2)
 
 bool CollisionLeft(RectBound Obj1, RectBound Obj2)
 {
-  if (Obj1.x <= (Obj2.x + Obj2.width) && (Obj1.x + Obj1.width) >= Obj2.x)
+  if (Obj1.x <= (Obj2.x + Obj2.width / 4) && (Obj1.x + Obj1.width) >= Obj2.x)
     return true;
   else
     return false;
 }
 bool CollisionRight(RectBound Obj1, RectBound Obj2)
 {
-  if  (Obj1.x >= (Obj2.x + Obj2.width) && (Obj1.x + Obj1.width) <= Obj2.x)
+  if  (Obj1.x >= (Obj2.x + Obj2.width / 4) && (Obj1.x + Obj1.width) <= Obj2.x)
     return true;
   else
     return false;
