@@ -31,7 +31,7 @@ class Player
     bool m_canJump;
 
     //Status Variables
-    int m_Health;
+    float m_Health;
     int m_MaxHealth = 100;
 
     //Bool Status Variables
@@ -60,6 +60,8 @@ class Player
 
     //Get sprite
     sf::Sprite getSprite();
+
+    float getHealth();
 
     //Other Funcs.
     void update(RectBound tilePos, float elapsedTime, RectBound camera);

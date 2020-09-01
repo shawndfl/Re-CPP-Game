@@ -57,6 +57,13 @@ int main()
   window.create(sf::VideoMode(windowWidth, windowHeight), "Game");
   window.setVerticalSyncEnabled(true);
 
+
+  //Game over picture
+  sf::Sprite gameOver;
+  gameOver.setTexture(TextureHolder::GetTexture("assets/GameOver.png"));
+  gameOver.setOrigin(32, 24);
+  gameOver.setPosition(windowWidth / 2, windowHeight / 2);
+
   sf::RectangleShape background;
   background.setSize(sf::Vector2f(windowWidth, windowHeight));
   background.setFillColor(sf::Color(120, 199, 245));
@@ -193,6 +200,12 @@ int main()
     }
 
     //Draw Everything Here
+
+    if (GameState == GameStates::GAMEOVER)
+    {
+      window.draw(gameOver);
+    }
+
     if (GameState == GameStates::PLAYING)
     {
       window.draw(background);

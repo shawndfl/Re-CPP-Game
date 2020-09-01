@@ -75,6 +75,11 @@ sf::Sprite Player::getSprite()
   return m_Sprite;
 }
 
+float Player::getHealth()
+{
+  return m_Health;
+}
+
 //Other Funcs.
 void Player::update(RectBound tilePos, float elapsedTime, RectBound camera)
 {
