@@ -3,6 +3,7 @@
 #include "Collisions.h"
 #include "Player.h"
 #include "Tile.h"
+#include "HealthBar.h"
 
 
 enum class GameStates { GAMEOVER, PLAYING, PAUSED };
@@ -18,6 +19,7 @@ int main()
   TextureHolder holder;
 
   Player player;
+  HealthBar pHealth;
 
   //Tile Space
   int levelWidthTiles = 20;
@@ -154,6 +156,7 @@ int main()
       }
 
       player.update(tilePos, dtAsSeconds, camera);
+      pHealth.update(player.getHealth());
 
       //Update Camera - Must be last!
 
@@ -219,6 +222,7 @@ int main()
           }
         }
       }
+      window.draw(pHealth.getHealthBar());
       window.draw(player.getSprite());
     }
 

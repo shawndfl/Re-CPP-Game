@@ -1,6 +1,6 @@
 
 #OBJS specifies which files to compile as part of the project
-OBJS = main.cpp TextureHolder.cpp Collision.cpp SpriteAnimator.cpp Player.cpp Tile.cpp
+OBJS = main.cpp TextureHolder.cpp Collision.cpp SpriteAnimator.cpp Player.cpp Tile.cpp HealthBar.cpp
 
 #CC specifies which compiler we're using
 CC = g++
