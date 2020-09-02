@@ -91,9 +91,9 @@ void Player::update(RectBound tilePos, float elapsedTime, RectBound camera)
   m_Yspeed += m_GravityAcceleration;
   if (m_Yvelocity > m_MaxYvelocity)
   {m_Yvelocity = m_MaxYvelocity;}
-  if (CollisionX(tilePos, m_Position))
+  if (CollisionX(tilePos, m_Xbone))
   {
-    if (CollisionBottom(m_Position, tilePos))
+    if (CollisionBottom(m_FloorBone, tilePos))
     {
       m_Yvelocity = 0; //Stop Falling
       m_Position.y = tilePos.y - m_Position.height; //Set y to ground coord
@@ -111,6 +111,11 @@ void Player::update(RectBound tilePos, float elapsedTime, RectBound camera)
 
   //Apply Y velocity
   m_Position.y += m_Yvelocity * elapsedTime;
+
+  m_HeadBone.y = m_Position.y;
+  m_HeadBone.height = 4;
+  m_FloorBone.y = (m_Position.y + m_Position.height) - 4;
+  m_FloorBone.height = 4;
 
   //#######
   //X Coord
@@ -144,20 +149,26 @@ void Player::update(RectBound tilePos, float elapsedTime, RectBound camera)
   }
 
   //Left Screen Edge Boundaries
-  if (m_movingLeft && m_Position.x <= camera.x)
+  if (m_movingLeft && m_Xbone.x <= camera.x)
   {
     m_Xvelocity = 0;
-    m_Position.x = camera.x;
+    m_Xbone.x = camera.x;
+    m_Position.x = m_Xbone.x - 4;
   }
   //Right screen edge boundaries
-  if (m_movingRight && (m_Position.x + m_Position.width) >= (camera.x + camera.width))
+  if (m_movingRight && (m_Xbone.x + m_Xbone.width) >= (camera.x + camera.width))
   {
     m_Xvelocity = 0;
-    m_Position.x = ((camera.x + camera.width) - m_Position.width);
+    m_Position.x = ((camera.x + camera.width) - m_Xbone.width);
   }
 
   //Apply X velocity to X coord
   m_Position.x += m_Xvelocity * elapsedTime;
+
+  m_Xbone.x = m_Position.x + 4;
+  m_Xbone.width = m_Position.width - 4;
+  m_Xbone.y = m_Position.y + 4;
+  m_Xbone.height = m_Position.height - 4;
 
   m_Sprite.setPosition(m_Position.x - camera.x, m_Position.y - camera.y);
 }

@@ -10,6 +10,10 @@ class Player
     RectBound m_Position;
     RectBound m_SpriteSize;
 
+    RectBound m_FloorBone;
+    RectBound m_HeadBone;
+    RectBound m_Xbone;
+
     sf::Sprite m_Sprite;
     int m_FramesPerRow = 10;
     int m_FramesPerColumn = 1;
