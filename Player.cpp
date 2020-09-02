@@ -170,6 +170,7 @@ void Player::update(RectBound tilePos, float elapsedTime, RectBound camera)
   m_Xbone.y = m_Position.y + 4;
   m_Xbone.height = m_Position.height - 4;
 
+  //Sprite position in relation to camera
   m_Sprite.setPosition(m_Position.x - camera.x, m_Position.y - camera.y);
 }
 
@@ -178,7 +179,6 @@ void Player::draw()
   //######################
   //handle animation here!
   //######################
-  //Sprite position in relation to camera
   //Animation
 
   //Temp Frame changer
