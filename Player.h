@@ -41,7 +41,8 @@ class Player
     //Bool Status Variables
     bool m_movingLeft;
     bool m_movingRight;
-    bool m_jumping;
+    bool m_IsJumping;
+    bool m_JustJumped;
     bool m_OnGround;
 
   public:
@@ -68,6 +69,7 @@ class Player
     float getHealth();
 
     //Other Funcs.
+    bool handleInput();
     void update(RectBound tilePos, float elapsedTime, RectBound camera);
     void draw();
 };

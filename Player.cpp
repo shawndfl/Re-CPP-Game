@@ -54,11 +54,11 @@ void Player::stopRight()
 //Y Coord Funcs.
 void Player::Jump()
 {
-  m_jumping = true;
+  m_IsJumping = true;
 }
 void Player::dontJump()
 {
-  m_jumping = false;
+  m_IsJumping = false;
 }
 void Player::Fall()
 {
@@ -78,6 +78,39 @@ sf::Sprite Player::getSprite()
 float Player::getHealth()
 {
   return m_Health;
+}
+
+bool Player::handleInput()
+{
+  m_JustJumped = false;
+
+  if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+  {
+    m_JustJumped = true;
+    m_IsJumping = true;
+  }
+  else
+  {
+    m_IsJumping = false;
+  }
+  if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+  {
+    m_movingLeft = true;
+  }
+  else
+  {
+    m_movingLeft = false;
+  }
+  if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+  {
+    m_movingRight = true;
+  }
+  else
+  {
+    m_movingRight = false;
+  }
+
+  return m_JustJumped;
 }
 
 //Other Funcs.
@@ -101,10 +134,10 @@ void Player::update(RectBound tilePos, float elapsedTime, RectBound camera)
     }
   }
   //Jump
-  if (m_jumping && m_canJump)
+  if (m_IsJumping && m_canJump)
   {
     m_Yvelocity = -(m_JumpSpeed);
-    m_jumping = true;
+    m_IsJumping = true;
     m_canJump = false;
     m_OnGround = false;
   }

@@ -98,14 +98,12 @@ int main()
     {
 
       if (sf::Keyboard::isKeyPressed(sf::Keyboard::P))
-        GameState = GameStates::PAUSED;
+      { GameState = GameStates::PAUSED; }
 
-      if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
-      {player.Jump();}else{player.dontJump();}
-      if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-      {player.moveLeft();}else{player.stopLeft();}
-      if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-      {player.moveRight();}else{player.stopRight();}
+      if (player.handleInput())
+      {
+        //Play a jump sound
+      }
     }
     if (GameState == GameStates::PAUSED)
     {
