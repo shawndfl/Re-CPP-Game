@@ -127,7 +127,8 @@ int main()
 
     //Make a decimal fraction of 1 from the delta time
     float dtAsSeconds = dt.asSeconds();
-    RectBound tilePos;
+
+    player.Fall();
 
     if (GameState == GameStates::PLAYING)
     {
@@ -143,17 +144,18 @@ int main()
 
               if (CollisionX(tiles[i][j].getPos(), player.getPos()))
               {
-                if (CollisionY(player.getPos(), tiles[i][j].getPos()) && tiles[i][j].getType() == tileTypes::ground)
+                if (CollisionY(player.getPos(), tiles[i][j].getPos()))
                 {
-                  tilePos = tiles[i][j].getPos();
+                  player.stopFalling(tiles[i][j].getPos().y);
                 }
               }
+
             }
           }
         }
       }
 
-      player.update(tilePos, dtAsSeconds, camera);
+      player.update(dtAsSeconds, camera);
       pHealth.update(player.getHealth());
 
       //Update Camera - Must be last!

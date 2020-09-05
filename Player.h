@@ -23,7 +23,7 @@ class Player
     //X Coord Variables
     float m_Xvelocity;
     int m_MaxXvelocity = 300;
-    int m_FMaxXvelocity = 450;//Will be used for speed button
+    int m_MaxXvelocityRun = 450;//Will be used for speed button
     int m_Xacceleration = 100;
 
     //Y Coord Variables
@@ -32,15 +32,15 @@ class Player
     int m_Yspeed;
     int m_GravityAcceleration = 62;
     int m_JumpSpeed = 600;
-    bool m_canJump;
+    bool m_CanJump;
 
     //Status Variables
     float m_Health;
     int m_MaxHealth = 100;
 
     //Bool Status Variables
-    bool m_movingLeft;
-    bool m_movingRight;
+    bool m_MovingLeft;
+    bool m_MovingRight;
     bool m_IsJumping;
     bool m_JustJumped;
     bool m_OnGround;
@@ -51,17 +51,13 @@ class Player
     RectBound getPos();
     RectBound getSpriteSize();
 
-    //X Coord Funcs.
-    void moveLeft();
-    void moveRight();
-    void stopLeft();
-    void stopRight();
 
-    //Y Coord Funcs.
-    void Jump();
-    void dontJump();
-    void Fall();
-    void OnGround();
+    void Fall(); //Activate Gravity
+
+    //Stop moving funcs.
+    void stopLeft(int Pos);
+    void stopRight(int Pos);
+    void stopFalling(int Pos);
 
     //Get sprite
     sf::Sprite getSprite();
@@ -70,7 +66,7 @@ class Player
 
     //Other Funcs.
     bool handleInput();
-    void update(RectBound tilePos, float elapsedTime, RectBound camera);
+    void update(float elapsedTime, RectBound camera);
     void draw();
 };
 

@@ -33,40 +33,23 @@ RectBound Player::getSpriteSize()
   return m_SpriteSize;
 }
 
-//X Coord Funcs.
-void Player::moveLeft()
-{
-  m_movingLeft = true;
-}
-void Player::moveRight()
-{
-  m_movingRight = true;
-}
-void Player::stopLeft()
-{
-  m_movingLeft = false;
-}
-void Player::stopRight()
-{
-  m_movingRight = false;
-}
 
-//Y Coord Funcs.
-void Player::Jump()
+void Player::stopLeft(int Pos)
 {
-  m_IsJumping = true;
+  m_Position.x = Pos;
 }
-void Player::dontJump()
+void Player::stopRight(int Pos)
 {
-  m_IsJumping = false;
+  m_Position.x = Pos - m_Position.width;
+}
+void Player::stopFalling(int Pos)
+{
+  m_Position.y = Pos - m_Position.height;
+  m_OnGround = true;
 }
 void Player::Fall()
 {
   m_OnGround = false;
-}
-void Player::OnGround()
-{
-  m_OnGround = true;
 }
 
 //Get Sprite
@@ -95,26 +78,26 @@ bool Player::handleInput()
   }
   if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
   {
-    m_movingLeft = true;
+    m_MovingLeft = true;
   }
   else
   {
-    m_movingLeft = false;
+    m_MovingLeft = false;
   }
   if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
   {
-    m_movingRight = true;
+    m_MovingRight = true;
   }
   else
   {
-    m_movingRight = false;
+    m_MovingRight = false;
   }
 
   return m_JustJumped;
 }
 
 //Other Funcs.
-void Player::update(RectBound tilePos, float elapsedTime, RectBound camera)
+void Player::update(float elapsedTime, RectBound camera)
 {
   //#######
   //Y Coord
@@ -124,42 +107,33 @@ void Player::update(RectBound tilePos, float elapsedTime, RectBound camera)
   m_Yspeed += m_GravityAcceleration;
   if (m_Yvelocity > m_MaxYvelocity)
   {m_Yvelocity = m_MaxYvelocity;}
-  if (CollisionX(tilePos, m_Xbone))
+  if (m_OnGround)
   {
-    if (CollisionBottom(m_FloorBone, tilePos))
-    {
-      m_Yvelocity = 0; //Stop Falling
-      m_Position.y = tilePos.y - m_Position.height; //Set y to ground coord
-      m_canJump = true; //Can jump
-    }
+    m_Yvelocity = 0; //Stop Falling
+    m_CanJump = true; //Can jump
   }
   //Jump
-  if (m_IsJumping && m_canJump)
+  if (m_IsJumping && m_CanJump)
   {
     m_Yvelocity = -(m_JumpSpeed);
     m_IsJumping = true;
-    m_canJump = false;
+    m_CanJump = false;
     m_OnGround = false;
   }
 
-  //Apply Y velocity
+  //Apply Y velocity to Y coord
   m_Position.y += m_Yvelocity * elapsedTime;
-
-  m_HeadBone.y = m_Position.y;
-  m_HeadBone.height = 4;
-  m_FloorBone.y = (m_Position.y + m_Position.height) - 4;
-  m_FloorBone.height = 4;
 
   //#######
   //X Coord
 
   //Move Left
-  if (m_movingLeft)
+  if (m_MovingLeft)
   {
     m_Xvelocity += -m_Xacceleration;
   }
   //Move Right
-  if (m_movingRight)
+  if (m_MovingRight)
   {
     m_Xvelocity += m_Xacceleration;
   }
@@ -171,7 +145,7 @@ void Player::update(RectBound tilePos, float elapsedTime, RectBound camera)
   {m_Xvelocity = -m_MaxXvelocity;}
 
   //Friction
-  if (!m_movingLeft && !m_movingRight && m_Xvelocity != 0)
+  if (!m_MovingLeft && !m_MovingRight && m_Xvelocity != 0)
   {
     if (m_Xvelocity > 0 && m_Xvelocity >= m_Xacceleration) //Right
       m_Xvelocity -= m_Xacceleration;
@@ -182,26 +156,20 @@ void Player::update(RectBound tilePos, float elapsedTime, RectBound camera)
   }
 
   //Left Screen Edge Boundaries
-  if (m_movingLeft && m_Xbone.x <= camera.x)
+  if (m_MovingLeft && m_Position.x <= camera.x)
   {
     m_Xvelocity = 0;
-    m_Xbone.x = camera.x;
-    m_Position.x = m_Xbone.x - 4;
+    m_Position.x = camera.x;
   }
   //Right screen edge boundaries
-  if (m_movingRight && (m_Xbone.x + m_Xbone.width) >= (camera.x + camera.width))
+  if (m_MovingRight && (m_Position.x + m_Position.width) >= (camera.x + camera.width))
   {
     m_Xvelocity = 0;
-    m_Position.x = ((camera.x + camera.width) - m_Xbone.width);
+    m_Position.x = ((camera.x + camera.width) - m_Position.width);
   }
 
   //Apply X velocity to X coord
   m_Position.x += m_Xvelocity * elapsedTime;
-
-  m_Xbone.x = m_Position.x + 4;
-  m_Xbone.width = m_Position.width - 4;
-  m_Xbone.y = m_Position.y + 4;
-  m_Xbone.height = m_Position.height - 4;
 
   //Sprite position in relation to camera
   m_Sprite.setPosition(m_Position.x - camera.x, m_Position.y - camera.y);
