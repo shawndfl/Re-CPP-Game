@@ -51,6 +51,8 @@ class Player
     RectBound getPos();
     RectBound getSpriteSize();
 
+    bool amIMovingLeft();
+    bool amIMovingRight();
 
     void Fall(); //Activate Gravity
 
@@ -67,7 +69,7 @@ class Player
     //Other Funcs.
     bool handleInput();
     void update(float elapsedTime, RectBound camera);
-    void draw();
+    void animate();
 };
 
 #endif

@@ -33,6 +33,14 @@ RectBound Player::getSpriteSize()
   return m_SpriteSize;
 }
 
+bool Player::amIMovingLeft()
+{
+  return m_MovingLeft;
+}
+bool Player::amIMovingRight()
+{
+  return m_MovingRight;
+}
 
 void Player::stopLeft(int Pos)
 {
@@ -175,7 +183,7 @@ void Player::update(float elapsedTime, RectBound camera)
   m_Sprite.setPosition(m_Position.x - camera.x, m_Position.y - camera.y);
 }
 
-void Player::draw()
+void Player::animate()
 {
   //######################
   //handle animation here!

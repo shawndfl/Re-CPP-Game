@@ -149,7 +149,6 @@ int main()
                   player.stopFalling(tiles[i][j].getPos().y);
                 }
               }
-
             }
           }
         }
@@ -198,7 +197,7 @@ int main()
     {
       //Put all animation funcs. in here!
 
-      player.draw();
+      player.animate();
       animClock.restart();
     }
 
