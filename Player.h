@@ -10,9 +10,8 @@ class Player
     RectBound m_Position;
     RectBound m_SpriteSize;
 
-    RectBound m_FloorBone;
-    RectBound m_HeadBone;
-    RectBound m_Xbone;
+    RectBound m_BodyBone;
+    RectBound m_FeetBone;
 
     sf::Sprite m_Sprite;
     int m_FramesPerRow = 10;
@@ -49,6 +48,8 @@ class Player
     Player();
 
     RectBound getPos();
+    RectBound getBodyBone();
+    RectBound getFeetBone();
     RectBound getSpriteSize();
 
     bool amIMovingLeft();

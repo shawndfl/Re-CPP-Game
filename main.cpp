@@ -142,11 +142,18 @@ int main()
             {
               tiles[i][j].update(camera);
 
-              if (CollisionX(tiles[i][j].getPos(), player.getPos()))
+              if (CollisionX(tiles[i][j].getPos(), player.getBodyBone()))
               {
-                if (CollisionY(player.getPos(), tiles[i][j].getPos()))
+                if (CollisionBottom(player.getFeetBone(), tiles[i][j].getPos()))
                 {
                   player.stopFalling(tiles[i][j].getPos().y);
+                }
+              }
+              if (CollisionY(tiles[i][j].getPos(), player.getBodyBone()))
+              {
+                if (CollisionLeft(player.getBodyBone(), tiles[i][j].getPos()))
+                {
+                  player.stopLeft(tiles[i][j].getPos().x + tiles[i][j].getPos().width);
                 }
               }
             }

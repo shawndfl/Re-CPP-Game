@@ -15,7 +15,6 @@ class RectBound //For boundaries (collisions)
 bool Collision(RectBound Obj1, RectBound Obj2);//For Every Collision in one
 
 //Y coords
-bool CollisionsGround(RectBound Obj1, RectBound Obj2);
 bool CollisionY(RectBound Obj1, RectBound Obj2);
 bool CollisionBottom(RectBound Obj1, RectBound Obj2);
 bool CollisionTop(RectBound Obj1, RectBound Obj2);

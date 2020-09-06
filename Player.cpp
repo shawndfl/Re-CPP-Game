@@ -12,6 +12,11 @@ Player::Player()
   m_Position.width = m_SpriteSize.width;
   m_Position.height = m_SpriteSize.height;
 
+  m_BodyBone.width = 16;
+  m_FeetBone.width = 16;
+  m_BodyBone.height = 16;
+  m_FeetBone.height = 8;
+
   m_MaxFr = m_FramesPerRow * m_FramesPerColumn;
   m_ActingFr = 0;
 
@@ -27,6 +32,14 @@ Player::Player()
 RectBound Player::getPos()
 {
   return m_Position;
+}
+RectBound Player::getBodyBone()
+{
+  return m_BodyBone;
+}
+RectBound Player::getFeetBone()
+{
+  return m_FeetBone;
 }
 RectBound Player::getSpriteSize()
 {
@@ -44,7 +57,7 @@ bool Player::amIMovingRight()
 
 void Player::stopLeft(int Pos)
 {
-  m_Position.x = Pos;
+  m_Position.x = Pos - 4;
 }
 void Player::stopRight(int Pos)
 {
@@ -75,7 +88,7 @@ bool Player::handleInput()
 {
   m_JustJumped = false;
 
-  if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+  if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && m_CanJump)
   {
     m_JustJumped = true;
     m_IsJumping = true;
@@ -121,7 +134,7 @@ void Player::update(float elapsedTime, RectBound camera)
     m_CanJump = true; //Can jump
   }
   //Jump
-  if (m_IsJumping && m_CanJump)
+  if (m_IsJumping)
   {
     m_Yvelocity = -(m_JumpSpeed);
     m_IsJumping = true;
@@ -178,6 +191,12 @@ void Player::update(float elapsedTime, RectBound camera)
 
   //Apply X velocity to X coord
   m_Position.x += m_Xvelocity * elapsedTime;
+
+  //#########
+  m_BodyBone.x = (m_Position.x + 4);
+  m_FeetBone.x = m_BodyBone.x;
+  m_BodyBone.y = m_Position.y;
+  m_FeetBone.y = (m_BodyBone.y + m_BodyBone.height);
 
   //Sprite position in relation to camera
   m_Sprite.setPosition(m_Position.x - camera.x, m_Position.y - camera.y);
